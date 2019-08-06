@@ -1,0 +1,3 @@
+import &StandardImport
+suite: ->
+  test 'Recipes' -> assert.eq 1, 1
