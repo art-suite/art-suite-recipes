@@ -4,5 +4,6 @@
 (module.exports = require('./namespace'))
 
 .addModules({
+  AppKitClient:   require('./AppKitClient'),
   StandardImport: require('./StandardImport')
 });

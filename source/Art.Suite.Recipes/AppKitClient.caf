@@ -1,10 +1,13 @@
 import &StandardImport
 
+log :AppKitClient
+
 class AppKitClient extends Recipe
   @description: "" A minimal art-app-kit client app.
-  @getter files: ->
+  @getter files: -> deepMerge
     @recipe
       &ArtBuildConfigurator.Recipes.ClientApp
+      dependencies: art-app-kit: :*
       clientFiles:
         StandardImport.caf:
           """
@@ -23,11 +26,32 @@ class AppKitClient extends Recipe
                   Page
                     @props
                     MenuSection
+
                       MenuMarkdown
                         text: """
-                          # Hello world
+                          # Home
 
-                          How are you?
+                          Welcome people to your app. Below are a few demo buttons. They don't do anything. You have to fill in their 'action'.
+
+                      MenuButton
+                        icon: :caretRight
+                        text: :right
+                        action: ->
+
+                      MenuButton
+                        icon: :caretLeft
+                        text: :left
+                        action: ->
+
+                      MenuButton
+                        icon: :caretUp
+                        text: :up
+                        action: ->
+
+                      MenuButton
+                        icon: :caretDown
+                        text: :down
+                        action: ->
 
           About.caf:
             """
@@ -45,11 +69,29 @@ class AppKitClient extends Recipe
 
                           About the makers of this app...
 
+                          # Made With
+
+                      BitmapElement
+                        :pointerCursor
+                        on: pointerClick: -> &ArtBrowserTools.openLink :http://ArtSuiteJS.com
+                        source: :https://raw.githubusercontent.com/art-suite/art-suite/master/assets/cover-cropped.png
+                        size: ww: 1 hw: .45
+
+                      BitmapElement
+                        :pointerCursor
+                        on: pointerClick: -> &ArtBrowserTools.openLink :http://ArtSuiteJS.com
+                        source: :https://raw.githubusercontent.com/wiki/shanebdavis/caffeine-script/CaffeineScriptLogo.png
+                        size: ww: 1 hw: .4
+
+
         Main.caf:
           """
             &ArtAppKit/Client.init {}
               title:      :#{@packageDotName}
               pages:      &Components/Pages
               pageStacks: []
-                {} id: :home
-                {} id: :about
+                {} id: :home  icon: :home
+                {} id: :about icon: :question
+
+    assets:
+      icons.cpf: fromBase64 "" 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
