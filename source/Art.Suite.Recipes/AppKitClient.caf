@@ -1,0 +1,55 @@
+import &StandardImport
+
+class AppKitClient extends Recipe
+  @description: "" A minimal art-app-kit client app.
+  @getter files: ->
+    @recipe
+      &ArtBuildConfigurator.Recipes.ClientApp
+      clientFiles:
+        StandardImport.caf:
+          """
+            &ArtSuite.mergeWithSelf
+              &ArtAppKit/Client
+              &ArtMarkdown/Client
+
+        Components: Pages:
+          Home.caf:
+            """
+              import &StandardImport
+
+              class Home extends ViewStateComponent
+
+                render: ->
+                  Page
+                    @props
+                    MenuSection
+                      MenuMarkdown
+                        text: """
+                          # Hello world
+
+                          How are you?
+
+          About.caf:
+            """
+              import &StandardImport
+
+              class About extends ViewStateComponent
+
+                render: ->
+                  Page
+                    @props
+                    MenuSection
+                      MenuMarkdown
+                        text: """
+                          # About
+
+                          About the makers of this app...
+
+        Main.caf:
+          """
+            &ArtAppKit/Client.init {}
+              title:      :#{@packageDotName}
+              pages:      &Components/Pages
+              pageStacks: []
+                {} id: :home
+                {} id: :about
