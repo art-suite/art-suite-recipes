@@ -79,7 +79,7 @@ class AppKitClient extends Recipe
 
                       BitmapElement
                         :pointerCursor
-                        on: pointerClick: -> &ArtBrowserTools.openLink :http://ArtSuiteJS.com
+                        on: pointerClick: -> &ArtBrowserTools.openLink :http://CaffeineScript.com
                         source: :https://raw.githubusercontent.com/wiki/shanebdavis/caffeine-script/CaffeineScriptLogo.png
                         size: ww: 1 hw: .4
 
