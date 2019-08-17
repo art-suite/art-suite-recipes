@@ -1,2 +1,3 @@
-require('art-suite');
+try {require('art-suite');}
+catch(err) {}
 module.exports = require('./Art.Suite.Recipes');

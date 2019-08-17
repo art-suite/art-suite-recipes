@@ -1,6 +1,4 @@
-import &StandardImport
-
-log :AppKitClient
+import &StandardImport, &ArtBinary
 
 class AppKitClient extends Recipe
   @description: "" A minimal art-app-kit client app.
