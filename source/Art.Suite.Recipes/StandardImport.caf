@@ -1,1 +1,1 @@
-&ArtSuite/Node.mergeWithSelf &ArtBuildConfigurator
+&ArtStandardLib.mergeWithSelf &ArtBuildConfigurator
